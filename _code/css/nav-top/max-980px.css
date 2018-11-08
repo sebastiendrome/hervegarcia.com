@@ -1,0 +1,8 @@
+/****
+* css modifications for small screens (width less than or equal to 720px)
+****/
+#nav ul li:first-child{width:100%;}
+#nav ul li h1{margin-bottom:20px;}
+.backTitle{top:20px; left:245px;}
+#footer{padding-left:20px;}
+#content div.divItem:first-child{margin-top:60px;}
