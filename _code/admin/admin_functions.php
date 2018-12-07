@@ -1520,7 +1520,7 @@ function resize($src, $dest, $width_orig, $height_orig, $width, $height){
 			}
 				
 			if($ext == '.jpg'){
-				imagejpeg($new, $dest, 90);
+				imagejpeg($new, $dest, 100);
 			}elseif($ext == '.gif'){ 
 				imagegif($new, $dest); 
 			}elseif($ext == '.png'){

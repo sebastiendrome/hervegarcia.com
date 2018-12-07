@@ -10,7 +10,7 @@
 session_start();
 
 // set version, to load fresh css and js
-$version = 20;
+$version = 33;
 
 // initialize site 
 define("SITE", $_SERVER['HTTP_HOST'].'/');
@@ -172,8 +172,8 @@ $_POST['types'] = $types;
 
 // FILE SIZES:
 $sizes = array();
-$sizes['L'] = array("width"=>800, "height"=>667);
-$sizes['M'] = array("width"=>650, "height"=>542);
+$sizes['L'] = array("width"=>1500, "height"=>1100);
+$sizes['M'] = array("width"=>800, "height"=>650);
 $sizes['S'] = array("width"=>300, "height"=>250);
 // register $sizes as a $_POST var, so it is accessible within functions scope.
 $_POST['sizes'] = $sizes;
@@ -181,7 +181,7 @@ $_POST['sizes'] = $sizes;
 // image size 
 $size = "_M";
 if(isset($_COOKIE['wW'])){
-    if($_COOKIE['wW'] > 1300 ){
+    if($_COOKIE['wW'] > 980 ){
         $size = "_L";
     }elseif($_COOKIE['wW'] < 340){
 		$size = "_S";

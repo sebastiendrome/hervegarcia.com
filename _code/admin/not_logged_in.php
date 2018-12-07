@@ -1,6 +1,6 @@
 <?php
 // redirect to https (if not local test)
-if( !strstr(SITE, '.local') && PROTOCOL != 'https://'){
+if( !strstr(SITE, '.local') && !strstr(SITE, 'll.') && PROTOCOL != 'https://'){
 	header("Location: https://".SITE."_code/admin/manage_structure.php");
 	exit;
 }

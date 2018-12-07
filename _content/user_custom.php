@@ -1,7 +1,7 @@
 <?php
 /* USER */
-$user_en = 'Filfolio: Portfolio d&#39;Artiste';
-$user_de = 'Filfolio: Artist Portfolio';
+$user_en = 'HERVÉ GARCIA';
+$user_de = 'HERVÉ GARCIA';
 // email
 $email = 'sebnewyork@gmail.com';
 // temporary new email
@@ -24,11 +24,11 @@ $second_lang = 'français';
 
 /* SEO */
 // home page title
-$seo_title_en = 'Un portfolio facile à personnaliser, idéal pour artistes';
-$seo_title_de = 'Customisable online portfolio optimised for artists';
+$seo_title_en = 'The artwork of Hervé Garcia';
+$seo_title_de = 'Hervé Garcia';
 // home page description
-$seo_description_en = 'Un site bilingue (vous choisissez vos langues!) facile à personnaliser, optimal pour la présentation d&#39;images haute-définition, et de tous types de médias. Minimaliste et essentiel.';
-$seo_description_de = 'A bilingual online portfolio (you choose the languages!) optimised for high-resolution images, and all types of media. Easy to update and customize. Minimalistic and essential.';
+$seo_description_en = '';
+$seo_description_de = '';
 
 /* lAYOUT */
 // nav on left or top
@@ -40,11 +40,11 @@ $sub_section_scroll = 'v';
 
 /* STYLES */
 // font size
-$font_size = '100%';
+$font_size = '90%';
 // font
-$site_font = '14px "PT Sans", sans-serif';
+$site_font = '13px "Open Sans", sans-serif';
 // header font
-$header_font = '"Arial Narrow", Arial, sans-serif';
+$header_font = '"Helvetica Neue", Helvetica, Arial, sans-serif';
 // font color
 $font_color = '383838';
 // links color

@@ -1,8 +1,8 @@
 /****
 * css modifications for small screens (width less than or equal to 720px)
 ****/
-#nav{max-width:250px;top:0; left:0;}
+#nav{top:0; left:0;}
 #content{padding:10px;}
 .backTitle{top:20px; left:245px;}
-#content{margin-top:10px; margin-left:240px;}
+#content{margin-top:10px; margin-left:200px;}
 #footer{padding-left:20px;}

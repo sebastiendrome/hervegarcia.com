@@ -120,8 +120,9 @@ $(document).ready(function(){
 		}
 
 		// now that we have the new coordinates, let's calculate the distance relative to window width and height, where these coordinates will be centered in window:
-		var fromTop = new_y-(wH/2);
-		var fromLeft = new_x-(wW/2);
+		var fromTop = Math.round( new_y-(wH/2) );
+		var fromLeft = Math.round( new_x-(wW/2) );
+		//alert(fromTop+' '+fromLeft);
 		// and finaly let's scroll there...
 		$('html,body').scrollTop(fromTop).scrollLeft(fromLeft);
 		

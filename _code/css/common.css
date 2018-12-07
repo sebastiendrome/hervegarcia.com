@@ -42,13 +42,16 @@ video{border:1px solid #ccc;}
 
 #content p.description, #content p.title{margin:6px 0 14px 0;}
 p.description, #footer{font-size:smaller;}
+#footer{opacity:.7;}
 #content p.description{margin-top:20px;}
 
-.divItem img{width:100%;}
-.divItem img.icon{width:auto; border:none;}
 .divItem{margin-bottom:55px;}
 .divItem, div.txt, div.html{position:relative;}
 div.txt, div.html{padding-bottom:15px; padding-top:7px;}
+
+.divItem img{width:auto; height:auto;}
+.divItem img.icon{width:auto; border:none;}
+span.innerFileContainer{display:inline-block;}
 
 /* images inserted in html/text files should have native width, but no more than allowed by container */
 div.txt img, div.html img, .wysihtml5-editor img{width:auto; max-width:100%;}

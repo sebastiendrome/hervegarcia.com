@@ -175,9 +175,12 @@ function display_content_array($path, $menu_array = ''){
 				}
 				
 				// display file and description
+				$display .= '
+				<!-- added so that the description can be aligned with the image -->
+				<span class="innerFileContainer">';
 				$display .= $display_file;
-				$display .= '<p class="description">'.$description.'</p>';
-
+				$display .= '<p class="description" style="text-align:right;">'.$description.'</p>';
+				$display .= '</span>';
 				
 			}else{ // folder = sub-section. show sub-section name and its first file.
 				
@@ -246,7 +249,8 @@ function display_file($path, $file_name, $raw = FALSE){
 	
 	if( file_exists(ROOT.CONTENT.$text_file) ){
 		$description = stripslashes( file_get_contents(ROOT.CONTENT.$text_file) );
-		$alt_content = substr( str_replace(array('\"', "\'"), array('&#34;', '&#39;'), strip_tags($description) ), 0, 30);
+		$alt_content = my_br2nl($description);
+		$alt_content = substr( str_replace(array('\"', "\'", "\n"), array('&#34;', '&#39;', ' '), strip_tags($alt_content) ), 0, 50);
 		$alt = ' alt="'.$alt_content.'"';
 	}else{
 		$description = '';
@@ -257,7 +261,28 @@ function display_file($path, $file_name, $raw = FALSE){
 	// 1. resizable types (jpg, gif, png)
 	if( preg_match($_POST['types']['resizable_types'], $ext) ){ // images
 		$item = $path.'/'.SIZE.'/'.$file_name;
-		list($w, $h) = getimagesize(ROOT.CONTENT.$item);
+		// get image size
+		list($xl_w, $xl_h) = getimagesize(ROOT.CONTENT.$path.'/_XL/'.$file_name);
+		// determine if img is wide or tall, re-calculate width sizes for tall images
+		$sizes = array();
+		foreach($_POST['sizes'] as $k => $v){
+			$sizes[$k] = $v;
+		}
+		$sizes['XL']['width'] = $xl_w;
+		/*
+		// calculate actual width of tall images (get ratio, loop through sizes, change width)
+		if($xl_w < $xl_h){
+			
+		}
+		*/
+
+		// srcset (source set html5 attribute) for responsive image sizes
+		$srcset = ' srcset="/'.CONTENT.$path.'/_S/'.$file_name.' '.$sizes['S']['width'].'w, 
+		/'.CONTENT.$path.'/_M/'.$file_name.' '.$sizes['M']['width'].'w, 
+		/'.CONTENT.$path.'/_L/'.$file_name.' '.$sizes['L']['width'].'w,
+		/'.CONTENT.$path.'/_XL/'.$file_name.' '.$sizes['XL']['width'].'w"';
+		//$srcset = '';
+		
 		// 'raw' or not: with surrounding zoom <a> link
 		if($raw){
 			$start_link = $end_link = '';
@@ -266,7 +291,7 @@ function display_file($path, $file_name, $raw = FALSE){
 			$end_link = '</a>';
 		}
 		
-		$display_file = $start_link.'<img src="/'.CONTENT.$item.'"'.$alt.' style="max-width:'.$w.'px">'.$end_link;
+		$display_file = $start_link.'<img src="/'.CONTENT.$item.'"'.$srcset.$alt.' class="responsive">'.$end_link;
 		
 	}else{
 		// if not an image, the file is in the _XL directory (no various sizes)

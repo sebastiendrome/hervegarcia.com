@@ -12,41 +12,6 @@ function limitNavHeight(){
 		$('#nav ul').css('margin-right', 0);
 	}
 }
-/*
-// load sub-section via ajax for orizontal scroll within top-section page (if set so by user)
-function loadSubSection(path, elem){
-	$(elem).css('opacity', '.5');
-	$.ajax({
-		method: "GET",
-		url: "/_code/load_sub_section.php",
-		data: 'path='+path
-	})
-	.done(function(msg){
-		$(elem).css('opacity', 1);
-		if(!msg.match("^<p class=\"error")){
-			
-			// update the title/link above the sub-section
-			var $title = $(elem).find('p.title.orizontal');
-			var $aMore = $title.find('a.aMore.orizontal');
-			var $href = $aMore.attr("href");
-			var fields = $href.split('/');
-			$title.html('<a href="/'+fields[1]+'/" class="aLess orizontal" data-close="'+fields[2]+'"><- '+fields[1]+'</a> | '+fields[2]);
-
-			// position the layer
-			var $firstEl = $(elem).find('a.imgMore');
-			var offSetTop = $firstEl.offset().top;
-			var offsetLeft = $(elem).offset().left;
-			var containerWidth = wW-offsetLeft;
-
-			$('body').append('<div class="subContainer" id="'+fields[2]+'" style="width:'+containerWidth+'px; top:'+offSetTop+'px; left:0; padding-left:'+offsetLeft+'px;">'+msg+'</div>');
-			$('.subContainer').wrapInner('<table cellspacing="0" cellpadding="0"><tr>');
-    		$('.subContainer .divItem').wrap('<td>');
-		}else{
-			alert(msg);
-		}
-	});
-}
-*/
 
 /* cookie functions */
 function setCookie(c_name,value,exdays){
@@ -71,15 +36,27 @@ function getCookie(c_name){
 var wW = $(window).width();
 var wH = $(window).height();
 
+var contentW = $('#content').innerWidth();
+if(contentW > wW){
+	contentW = wW;
+}
+
+// max width and height for images
+var max_w = contentW;
+var max_h = wH-40;
+
 // set cookies of window width and height for later use
 setCookie('wW', wW, 2);
 setCookie('wH', wH, 2);
+
+setCookie('iW', max_w, 2);
+setCookie('iH', max_h, 2);
 
 $(document).ready(function(){
 
 	// get footer height
 	var fH = $('#footer').outerHeight();
-	// gte nav height
+	// get nav height
 	var navH = $('#nav').outerHeight();
 
 	limitNavHeight();
@@ -92,28 +69,30 @@ $(document).ready(function(){
 		contentMinHeight = wH-fH-60;
 	}
 
-	// show/hide navigation for small screens
-	$('#nav').on('click', function(e){
-		// if viewport width is less than 720px, 
-		if (document.documentElement.clientWidth < 720) {
-
-			contentMinHeight = wH-fH-100;
-			if($(this).hasClass('collapsible')){
-				$(this).removeClass('collapsible').removeAttr("style");
-			}else if($(this).height() == wH){ // collaspible class has been removed by limitNavHeight function, so just look for nav_height = window_height
-				$(this).css({'height':navH+'px', 'overflow':'hidden'});
+	// if viewport width is less than 720px, 
+	if (document.documentElement.clientWidth < 720) {
+		contentMinHeight = wH-fH-78;
+		
+		// show/hide navigation for small screens
+		$('#nav').on('click', 'a#mobileMenu', function(e){
+			if($('#nav').hasClass('collapsible')){
+				$('#nav').removeClass('collapsible').removeAttr("style");
+			}else if($('#nav').height() == wH){ // collaspible class has been removed by limitNavHeight function, so just look for nav_height = window_height
+				$('#nav').css({'height':navH+'px', 'overflow':'hidden'});
 				$('#nav ul').css('margin-right', '10px');
 			}else{
-				$(this).addClass('collapsible').removeAttr("style");
+				$('#nav').addClass('collapsible').removeAttr("style");
 				limitNavHeight();
 			}
+			e.preventDefault();
 		
 			// avoid propagation of nav click if click on site title (#nav h1 a)
-			$('#nav h1 a').click(function(event){
+			/*$('#nav h1 a').click(function(event){
 				event.stopPropagation();
-			});
-		}
-	});
+			});*/
+		});
+	}
+	
 
 	// position footer at bottom of page even if no content
 	$('#content').css('min-height', contentMinHeight+'px');
@@ -126,22 +105,6 @@ $(document).ready(function(){
 	// un-underline '.aMore' link when mouse over '.imgMore' (for sub-sections)
 	$('div.divItem').on('mouseleave', 'a.imgMore', function(){
 		$(this).closest('.divItem').children('.title').children('.aMore').css('text-decoration', '');
-	});
-
-	// sub-section should load via ajax (and scroll orizontally) if set so by user
-	$('div.divItem').on('click', 'a.aMore.orizontal, a.imgMore.orizontal', function(e){
-		var path = $(this).attr("href");
-		var elem = $(this).closest('div.divItem');
-		//alert(path);
-		loadSubSection(path, elem);
-		e.preventDefault();
-	});
-	// close sub-section
-	$('div.divItem').on('click', '.aLess.orizontal', function(e){
-		var closeId = $(this).data("close");
-		//alert(closeId);
-		$('#'+closeId).hide();
-		e.preventDefault();
 	});
 
 });

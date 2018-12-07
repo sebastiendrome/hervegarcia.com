@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700');
 
 /***** user defined styles *****/
 
@@ -11,16 +11,16 @@ div.txt, div.html, .textareaContainer, .wysihtml5-editor{background-color:#FFFFF
 
 /* site_font */
 body, td, th, select, input, button, textarea{
-	font:14px "PT Sans", sans-serif;
+	font:13px "Open Sans", sans-serif;
 	color:#383838;
 	line-height:1.4; /* do not add pixels or ems! this is relative to font size */ 
 }
 
 /* font_size */
-/*body, html{font-size:100%;}*/
+/*body, html{font-size:90%;}*/
 
 /* header font */
-h1, h2, h3{font-family:"Arial Narrow", Arial, sans-serif;}
+h1, h2, h3{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 
 /* links color */
 a{color:#000000;} 
@@ -32,4 +32,4 @@ a.imgMore{color:#383838;}
 .divItem img, .divItem div.txt, .divItem div.html,/* .textareaContainer,*/ .wysihtml5-editor img{border:none;}
 .divItem div.txt, .divItem div.html{border-bottom:1px solid #ddd;}
 #nav ul li:hover ul{display:block;}
-.backTitle{display:none;}
+.backTitle, .title{display:none;}
